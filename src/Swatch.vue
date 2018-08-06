@@ -47,7 +47,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .swatch {
   position: relative;
   width: auto;
