@@ -1,7 +1,19 @@
 <template>
-  <div class="swatch" :style="backgroundStyle">
-    <p class="color-value" :class="[lightUi ? 'white' : 'black']">{{ hexValue }}</p>
-    <p><i class="material-icons" :class="[lightUi ? 'white' : 'black']">delete</i></p>
+  <div
+    class="swatch"
+    :style="backgroundStyle">
+    <p
+      class="color-value"
+      :class="[lightUi ? 'white' : 'black']">
+      {{ hexValue }}
+    </p>
+    <p>
+      <i
+        class="material-icons"
+        :class="[lightUi ? 'white' : 'black']">
+        delete
+      </i>
+    </p>
   </div>
 </template>
 

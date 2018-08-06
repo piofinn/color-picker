@@ -1,13 +1,23 @@
 <template>
-  <div id="main-container" :style="backgroundStyle" @copy.stop="copyValue">
-    <h1 class="ui-overlay" :class="[lightUi ? 'white' : 'black']">{{ hexValue }}</h1>
-    <Touchpad :color="color" :light-ui="lightUi" :locked="locked" @click="console.log('v-on:click')" />
+  <div
+    id="main-container"
+    :style="backgroundStyle"
+    @copy.stop="copyValue">
+    <h1
+      class="ui-overlay"
+      :class="[lightUi ? 'white' : 'black']">
+      {{ hexValue }}
+    </h1>
+    <Touchpad
+      :color="color"
+      :light-ui="lightUi"
+      :locked="locked"
+      @click="console.log('v-on:click')" />
     <div id="swatches-container">
       <Swatch
         v-for="singleColor in this.savedColors"
         :key="singleColor.id"
-        :color="singleColor.color"
-      ></swatch>
+        :color="singleColor.color" />
     </div>
   </div>
 </template>
@@ -61,7 +71,7 @@ export default {
         color: Object.assign({}, this.color)
       });
     },
-    addListeners: function() {
+    makeListeners: function() {
       var lockFunc = this.toggleLock;
       var saveFunc = this.saveColor;
       return function(event) {
@@ -76,7 +86,7 @@ export default {
     }
   },
   mounted: function() {
-    document.addEventListener("keydown", this.addListeners(), false);
+    document.addEventListener("keydown", this.makeListeners(), false);
   }
 };
 </script>
