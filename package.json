@@ -1,0 +1,29 @@
+{
+  "name": "color",
+  "version": "0.2.0",
+  "description": "'Interactive color picker built with Vue.js'",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js"
+  },
+  "author": "Pio Rasch-Halvorsen <pio@rasch-halvorsen.no>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.16"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^5.2.0",
+    "mocha-loader": "^1.1.3",
+    "mocha-webpack": "^1.1.0",
+    "vue-loader": "^15.2.6",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.6",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
+  }
+}
