@@ -18,7 +18,7 @@
         icon="trash"
         class="ui-overlay"
         :class="getUiColor()"
-        @click="test" />
+        @click="deleteColor" />
     </p>
   </div>
 </template>
@@ -35,6 +35,10 @@ export default {
       validator: value => {
         return value.h !== null && value.s !== null && value.v !== null;
       }
+    },
+    colorId: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -53,6 +57,9 @@ export default {
   methods: {
     test: function(event) {
       console.log("event triggered", event);
+    },
+    deleteColor: function() {
+      this.$emit("delete-action", this.colorId);
     },
     getUiColor: function() {
       return this.lightUi ? "white" : "black";
