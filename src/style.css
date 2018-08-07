@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Archivo+Black");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 html,
 body {
@@ -69,7 +68,7 @@ h1 {
 }
 
 .black {
-  color: #000;
+  color: rgba(0, 0, 0, 0.85);
   border-color: #000;
 }
 .white {
