@@ -17,7 +17,9 @@
       <Swatch
         v-for="singleColor in this.savedColors"
         :key="singleColor.id"
-        :color="singleColor.color" />
+        :color-id="singleColor.id"
+        :color="singleColor.color"
+        @delete-action="deleteColor" />
     </div>
   </div>
 </template>
@@ -70,6 +72,9 @@ export default {
         id: this.colorId++,
         color: Object.assign({}, this.color)
       });
+    },
+    deleteColor: function(colorId) {
+      this.savedColors = this.savedColors.filter(color => color.id !== colorId);
     },
     makeListeners: function() {
       var lockFunc = this.toggleLock;

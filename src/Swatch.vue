@@ -4,15 +4,21 @@
     :style="backgroundStyle">
     <p
       class="color-value"
-      :class="[lightUi ? 'white' : 'black']">
+      :class="getUiColor()">
       {{ hexValue }}
     </p>
-    <p>
-      <i
-        class="material-icons"
-        :class="[lightUi ? 'white' : 'black']">
-        delete
-      </i>
+    <p
+      class="actions">
+      <font-awesome-icon
+        icon="clone"
+        class="ui-overlay"
+        :class="getUiColor()"
+        @click="test" />
+      <font-awesome-icon
+        icon="trash"
+        class="ui-overlay"
+        :class="getUiColor()"
+        @click="deleteColor" />
     </p>
   </div>
 </template>
@@ -29,6 +35,10 @@ export default {
       validator: value => {
         return value.h !== null && value.s !== null && value.v !== null;
       }
+    },
+    colorId: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -43,6 +53,17 @@ export default {
         backgroundColor: this.hexValue
       };
     }
+  },
+  methods: {
+    test: function(event) {
+      console.log("event triggered", event);
+    },
+    deleteColor: function() {
+      this.$emit("delete-action", this.colorId);
+    },
+    getUiColor: function() {
+      return this.lightUi ? "white" : "black";
+    }
   }
 };
 </script>
@@ -51,7 +72,7 @@ export default {
 .swatch {
   position: relative;
   width: auto;
-  padding: 1em;
+  padding: 16px;
   margin: 16px;
   transition: height ease-in-out 0.3s;
   -webkit-transition: height ease-in-out 0.3s;
@@ -59,17 +80,22 @@ export default {
 p {
   margin: 0;
 }
+p.actions {
+  padding: 8px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  text-align: end;
+}
+p.actions > svg {
+  padding: 8px;
+  cursor: pointer;
+}
 .color-value {
   padding-bottom: 3em;
   font-family: "Archivo Black", "Gill Sans", "Gill Sans MT", Calibri,
     "Trebuchet MS", sans-serif;
   font-size: 2vw;
-}
-.material-icons {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 16px;
-  cursor: pointer;
 }
 </style>

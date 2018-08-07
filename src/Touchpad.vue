@@ -19,15 +19,12 @@
       class="ui-overlay bottom left"
       :class="[lightUi ? 'white' : 'black']">
     </div>
-    <p
+    <font-awesome-icon
       v-if="locked"
-      id="lock-icon">
-      <i
-        class="ui-overlay material-icons"
-        :class="[lightUi ? 'white' : 'black']">
-        lock  
-      </i>
-    </p>							
+      icon="lock"
+      id="lock-icon"
+      class="ui-overlay"
+      :class="getOverlayColor()" />
   </div>
 </template>
 
@@ -66,6 +63,9 @@ export default {
       if (this.locked) return;
       let changeAmount = event.deltaY * 0.0006;
       this.color.v = Math.min(1, Math.max(0, this.color.v + changeAmount));
+    },
+    getOverlayColor: function() {
+      return this.lightUi ? "white" : "black";
     }
   }
 };
@@ -73,10 +73,14 @@ export default {
 
 <style>
 #lock-icon {
-  width: 100%;
-  height: 100%;
+  width: 15vw;
+  height: 15vw;
   margin: 0;
   padding: 0;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 #lock-icon > i {
   font-size: 20vw;
