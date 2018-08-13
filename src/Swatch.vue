@@ -25,6 +25,7 @@
 
 <script>
 import { hsvToRgb, findColorLightness } from "./util/colorConversion.js";
+const convertToHex = true;
 
 export default {
   name: "Swatch",
@@ -43,7 +44,7 @@ export default {
   },
   computed: {
     hexValue: function() {
-      return hsvToRgb(this.color, true);
+      return hsvToRgb(this.color, convertToHex);
     },
     lightUi: function() {
       return findColorLightness(this.color) < 0.1791;
@@ -90,10 +91,10 @@ p.actions {
 }
 p.actions > svg {
   padding: 8px;
+  padding-top: 60em;
   cursor: pointer;
 }
 .color-value {
-  padding-bottom: 3em;
   font-family: "Archivo Black", "Gill Sans", "Gill Sans MT", Calibri,
     "Trebuchet MS", sans-serif;
   font-size: 2vw;
