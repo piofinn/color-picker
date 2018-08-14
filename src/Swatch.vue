@@ -5,7 +5,7 @@
     <p
       class="color-value"
       :class="getUiColor()">
-      {{ hexValue }}
+      {{ hexValue }} ({{ colorId }})
     </p>
     <p
       class="actions">
@@ -25,6 +25,10 @@
 
 <script>
 import { hsvToRgb, findColorLightness } from "./util/colorConversion.js";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faClone, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(faClone, faTrash);
 const convertToHex = true;
 
 export default {
@@ -32,22 +36,24 @@ export default {
   props: {
     color: {
       type: Object,
-      required: true,
-      validator: value => {
-        return value.h !== null && value.s !== null && value.v !== null;
-      }
-    },
-    colorId: {
-      type: Number,
       required: true
     }
   },
+  components: {
+    FontAwesomeIcon
+  },
   computed: {
+    colorValue: function () {
+      return this.color.color;
+    },
+    colorId: function() {
+      return this.color.id;
+    },
     hexValue: function() {
-      return hsvToRgb(this.color, convertToHex);
+      return hsvToRgb(this.colorValue, convertToHex);
     },
     lightUi: function() {
-      return findColorLightness(this.color) < 0.1791;
+      return findColorLightness(this.colorValue) < 0.1791;
     },
     backgroundStyle: function() {
       return {
@@ -60,11 +66,15 @@ export default {
       console.log("event triggered", event);
     },
     deleteColor: function() {
+      console.log(this.colorId);
       this.$emit("delete-action", this.colorId);
     },
     getUiColor: function() {
       return this.lightUi ? "white" : "black";
     }
+  },
+  created () {
+    console.log(this.colorId);
   }
 };
 </script>

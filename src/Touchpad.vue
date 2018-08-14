@@ -2,7 +2,7 @@
   <div
     id="scrollTarget"
     @mousemove="changeHueSat"
-    @wheel.stop="changeValue">
+    @wheel="changeValue">
     <div
       class="ui-overlay top left"
       :class="[lightUi ? 'white' : 'black']">
@@ -29,8 +29,16 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(faLock);
+
 export default {
   name: "Touchpad",
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     locked: {
       type: Boolean,
@@ -61,11 +69,15 @@ export default {
     },
     changeValue: function(event) {
       if (this.locked) return;
+      this.stopEvent(event);
       let changeAmount = event.deltaY * 0.0006;
       this.color.v = Math.min(1, Math.max(0, this.color.v + changeAmount));
     },
     getOverlayColor: function() {
       return this.lightUi ? "white" : "black";
+    },
+    stopEvent: function(event) {
+      event.stopPropagation();
     }
   }
 };
