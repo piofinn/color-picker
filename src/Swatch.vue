@@ -5,7 +5,7 @@
     <p
       class="color-value"
       :class="getUiColor()">
-      {{ hexValue }} ({{ colorId }})
+      {{ hexValue }}
     </p>
     <p
       class="actions">
@@ -18,7 +18,7 @@
         icon="trash"
         class="ui-overlay"
         :class="getUiColor()"
-        @click="deleteColor" />
+        @click.prevent="deleteColor" />
     </p>
   </div>
 </template>
@@ -52,9 +52,6 @@ export default {
     hexValue: function() {
       return hsvToRgb(this.colorValue, convertToHex);
     },
-    lightUi: function() {
-      return findColorLightness(this.colorValue) < 0.1791;
-    },
     backgroundStyle: function() {
       return {
         backgroundColor: this.hexValue
@@ -66,11 +63,10 @@ export default {
       console.log("event triggered", event);
     },
     deleteColor: function() {
-      console.log(this.colorId);
       this.$emit("delete-action", this.colorId);
     },
     getUiColor: function() {
-      return this.lightUi ? "white" : "black";
+      return findColorLightness(this.colorValue) < 0.1791 ? "white" : "black";
     }
   },
   created () {
@@ -84,7 +80,7 @@ export default {
   position: relative;
   width: auto;
   padding: 16px;
-  margin: 16px;
+  margin: 0 16px 16px 16px;
   transition: height ease-in-out 0.3s;
   -webkit-transition: height ease-in-out 0.3s;
 }
@@ -101,7 +97,6 @@ p.actions {
 }
 p.actions > svg {
   padding: 8px;
-  padding-top: 60em;
   cursor: pointer;
 }
 .color-value {

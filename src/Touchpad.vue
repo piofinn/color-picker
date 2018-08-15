@@ -2,7 +2,7 @@
   <div
     id="scrollTarget"
     @mousemove="changeHueSat"
-    @wheel="changeValue">
+    @wheel.prevent="changeValue">
     <div
       class="ui-overlay top left"
       :class="[lightUi ? 'white' : 'black']">
@@ -69,15 +69,11 @@ export default {
     },
     changeValue: function(event) {
       if (this.locked) return;
-      this.stopEvent(event);
       let changeAmount = event.deltaY * 0.0006;
       this.color.v = Math.min(1, Math.max(0, this.color.v + changeAmount));
     },
     getOverlayColor: function() {
       return this.lightUi ? "white" : "black";
-    },
-    stopEvent: function(event) {
-      event.stopPropagation();
     }
   }
 };
@@ -85,17 +81,11 @@ export default {
 
 <style>
 #lock-icon {
-  width: 15vw;
-  height: 15vw;
+  /* width: 15vw;
+  height: 15vw; */
+  font-size: 20vh;
   margin: 0;
   padding: 0;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-#lock-icon > i {
-  font-size: 20vw;
   position: relative;
   left: 50%;
   top: 50%;
