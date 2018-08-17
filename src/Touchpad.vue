@@ -64,7 +64,7 @@ export default {
       if (this.locked) return;
       let yPos = event.offsetY / event.target.offsetHeight;
       let xPos = event.offsetX / event.target.offsetWidth;
-      this.color.h = Math.max(Math.floor(xPos * 360), 0);
+      this.color.h = Math.max(Math.floor(xPos * 359), 0);
       this.color.s = 1 - yPos;
     },
     changeValue: function(event) {
