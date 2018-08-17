@@ -10,7 +10,7 @@
     <p
       class="actions">
       <font-awesome-icon
-        icon="clone"
+        icon="copy"
         class="ui-overlay"
         :class="getUiColor()"
         @click="test" />
@@ -26,9 +26,9 @@
 <script>
 import { hsvToRgb, findColorLightness } from "./util/colorConversion.js";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faClone, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-library.add(faClone, faTrash);
+library.add(faCopy, faTrash);
 const convertToHex = true;
 
 export default {
