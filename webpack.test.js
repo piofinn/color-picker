@@ -1,8 +1,9 @@
-const merge = require('webpack-merge');
-const dev = require('./webpack.prod.js');
-const nodeExternals = require('webpack-node-externals');
+const merge = require("webpack-merge");
+const common = require("./webpack.common.js");
+const nodeExternals = require("webpack-node-externals");
 
-module.exports = merge(dev, {
-  devtool: 'inline-source-map',
+module.exports = merge(common, {
+  mode: "production",
+  devtool: "inline-source-map",
   externals: [nodeExternals()]
-})
+});
