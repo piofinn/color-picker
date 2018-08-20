@@ -5,19 +5,19 @@
     @wheel.prevent="changeValue">
     <div
       class="ui-overlay top left"
-      :class="[lightUi ? 'white' : 'black']">
+      :class="getOverlayColor()">
     </div>
     <div
       class="ui-overlay top right"
-      :class="[lightUi ? 'white' : 'black']">
+      :class="getOverlayColor()">
     </div>
     <div
       class="ui-overlay bottom right"
-      :class="[lightUi ? 'white' : 'black']">
+      :class="getOverlayColor()">
     </div>
     <div
       class="ui-overlay bottom left"
-      :class="[lightUi ? 'white' : 'black']">
+      :class="getOverlayColor()">
     </div>
     <font-awesome-icon
       v-if="locked"
@@ -57,9 +57,6 @@ export default {
     }
   },
   methods: {
-    test: function(event) {
-      console.log("v-on event", event);
-    },
     changeHueSat: function(event) {
       if (this.locked) return;
       let yPos = event.offsetY / event.target.offsetHeight;
@@ -81,8 +78,6 @@ export default {
 
 <style>
 #lock-icon {
-  /* width: 15vw;
-  height: 15vw; */
   font-size: 20vh;
   margin: 0;
   padding: 0;
