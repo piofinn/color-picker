@@ -25,14 +25,21 @@
       id="lock-icon"
       class="ui-overlay"
       :class="getOverlayColor()" />
+    <font-awesome-icon
+      v-if="locked"
+      icon="crosshairs"
+      id="marker"
+      class="ui-overlay"
+      :class="getOverlayColor()"
+      :style="markerPosStyle" />
   </div>
 </template>
 
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-library.add(faLock);
+library.add(faLock, faCrosshairs);
 
 export default {
   name: "Touchpad",
@@ -53,6 +60,16 @@ export default {
       required: true,
       validator: value => {
         return value.h !== null && value.s !== null && value.v !== null;
+      }
+    }
+  },
+  computed: {
+    markerPosStyle: function() {
+      let topPct = (1 - this.color.s) * 100;
+      let leftPct = (this.color.h / 359) * 100;
+      return {
+        top: topPct + "%",
+        left: leftPct + "%"
       }
     }
   },
@@ -84,6 +101,13 @@ export default {
   position: relative;
   left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%);
+}
+#marker {
+  font-size: 20pt;
+  margin: 0;
+  padding: 0;
+  position: absolute;
   transform: translate(-50%, -50%);
 }
 </style>

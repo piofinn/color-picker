@@ -2,6 +2,11 @@
 
 Color is a fullscreen color picker for the web, based on Vue.js and plain old Javascript. It lets you focus on the color you are picking rather than the color palette you are choosing from.
 
+## 0.3.4 Changelog
+
+* Added crosshairs showing location of color when in locked mode
+* Tweaked position and size of lock icon
+
 ## Getting started
 
 If you want to play around with the project on your own machine you can follow the instructions below to set up the dev environment in just a few minutes!
