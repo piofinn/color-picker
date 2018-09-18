@@ -3,7 +3,7 @@ const common = require("./webpack.common.js");
 const nodeExternals = require("webpack-node-externals");
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: "development",
   devtool: "inline-source-map",
   externals: [nodeExternals()]
 });
