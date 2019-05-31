@@ -1,37 +1,24 @@
 <template>
-  <div
-    id="main-container"
-    :style="backgroundStyle"
-    @copy.stop="copyValue">
-    <h1
-      class="ui-overlay"
-      :class="[lightUi ? 'white' : 'black']">
-      {{ hexValue }}
-    </h1>
-    <Touchpad
-      :color="color"
-      :light-ui="lightUi"
-      :locked="locked" />
+  <div id="main-container" :style="backgroundStyle" @copy.stop="copyValue">
+    <h1 class="ui-overlay" :class="[lightUi ? 'white' : 'black']">{{ hexValue }}</h1>
+    <Touchpad :color="color" :light-ui="lightUi" :locked="locked"/>
     <font-awesome-icon
       icon="bars"
       id="menu-open-button"
       class="ui-overlay"
       :class="[lightUi ? 'white' : 'black']"
-      @click="toggleMenu" />
-    <div
-      id="swatches-container"
-      :class="[showMenu ? 'open' : 'closed']">
-      <p
-        id="menu-close-button">
-        <font-awesome-icon
-          icon="times"
-          @click.prevent="toggleMenu" />
+      @click="toggleMenu"
+    />
+    <div id="swatches-container" :class="[showMenu ? 'open' : 'closed']">
+      <p id="menu-close-button">
+        <font-awesome-icon icon="times" @click.prevent="toggleMenu"/>
       </p>
       <Swatch
         v-for="color in this.savedColors"
         :key="color.id"
         :color="Object.assign({}, color)"
-        @delete-action="deleteColor" />
+        @delete-action="deleteColor"
+      />
     </div>
   </div>
 </template>
@@ -98,7 +85,9 @@ export default {
       });
     },
     deleteColor: function(idToDelete) {
-      this.savedColors = this.savedColors.filter(color => color.id !== idToDelete);
+      this.savedColors = this.savedColors.filter(
+        color => color.id !== idToDelete
+      );
     },
     makeListeners: function() {
       var lockFunc = this.toggleLock;
@@ -128,21 +117,16 @@ export default {
 #swatches-container {
   position: absolute;
   top: 0;
+  left: 100%;
   box-sizing: border-box;
   width: 300px;
   height: 100vh;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0, 0, 0, 0.9);
   overflow-y: scroll;
-  transition: left ease-in-out 0.5s;
-  /* display: none; */
+  transition: transform ease-in-out 0.2s;
 }
 #swatches-container.open {
-  right: 0;
-  left: auto;
-}
-#swatches-container.closed {
-  left: 100%;
-  right: auto;
+  transform: translateX(-100%);
 }
 #menu-close-button {
   display: inline-block;
@@ -153,7 +137,7 @@ export default {
   text-align: right;
   font-size: 6vh;
   line-height: 6vh;
-  color: #FFF;
+  color: #fff;
   text-decoration: none;
 }
 #menu-close-button > svg {
